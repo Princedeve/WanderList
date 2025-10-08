@@ -1,0 +1,25 @@
+Line                                   Purpose
+-------------------------------------  -----------------------------------------------------------
+✅ const express = require("express");      // Imports the Express framework
+
+✅ const mongoose = require("mongoose");    // Imports Mongoose (you’ll still need mongoose.connect(...) later)
+
+✅ const app = express();                   // Creates the Express application
+
+✅ const path = require("path");            // Helps build absolute paths
+
+✅ const methodOverride = require("method-override"); // Enables HTTP verb overrides (PUT / DELETE)
+
+✅ app.use(methodOverride("_method"));      // Allows overriding methods using ?_method or hidden fields
+
+✅ app.set("view engine", "ejs");           // Sets EJS as the template engine
+
+✅ app.set("views", path.join(__dirname, "views")); // Points to the folder containing EJS templates
+
+✅ app.use(express.static(path.join(__dirname, "public"))); // Serves static files (CSS, JS, images)
+
+✅ app.use(express.json());                 // Parses incoming JSON request bodies
+
+✅ app.use(express.urlencoded({ extended: true })); // Parses URL-encoded form data
+
+app.engine("ejs", ejsMate); // for repeated template 
