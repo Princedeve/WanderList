@@ -44,6 +44,7 @@ app.get("/", (req, res)=>{
 //Index Route
 app.get("/listings", async(req, res) =>{
    const allListings = await Listing.find({});
+   allListings.forEach(l => l.price = Number(l.price));
    res.render("listings/index.ejs", {allListings});
 });
 //New Route
