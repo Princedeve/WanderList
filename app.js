@@ -45,33 +45,21 @@ app.get("/", (req, res)=>{
 // });
 
 //Index Route
-app.get("/listings", async(req, res) =>{
+app.get("/listings", wrapAsync(async(req, res) =>{
    const allListings = await Listing.find({});
    allListings.forEach(l => l.price = Number(l.price));
    res.render("listings/index.ejs", {allListings});
-});
+}));
 //New Route
 app.get("/listings/new", (req, res) =>{
     res.render("listings/new.ejs");
 });
 //Show Route
-app.get("/listings/:id", async(req, res) =>{
-    try{
+app.get("/listings/:id",  wrapAsync(async(req, res, next) =>{
         let {id} = req.params;
         const listing = await Listing.findById(id);
-        
-        if(!listing){
-            return res.status(404).send("Listing not found");
-        }
-
         res.render("listings/show.ejs", {listing});
-    }catch(err){
-
-        console.log(err);
-        res.status(500).send("Server error");
-    }
-
-});
+}));
 
 //Create Route
 app.post("/listings", wrapAsync(async(req, res, next) => {
@@ -82,33 +70,33 @@ app.post("/listings", wrapAsync(async(req, res, next) => {
 }));
 
 //Edit Route
-app.get("/listings/:id/edit", async(req, res) =>{
+app.get("/listings/:id/edit",  wrapAsync(async(req, res) =>{
     let {id} = req.params;
     const listing = await Listing.findById(id);
     res.render("listings/edit.ejs", {listing});
-});
+}));
 
 //Update Route
-app.put("/listings/:id", async(req, res) =>{
+app.put("/listings/:id", wrapAsync( async(req, res) =>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/listings/${id}`);
-});
+}));
 
 //Delete Route
-app.delete("/listings/:id", async(req, res) =>{
+app.delete("/listings/:id",  wrapAsync(async(req, res) =>{
     let {id} = req.params;
     let deleteListing = await Listing.findByIdAndDelete(id);
     console.log(deleteListing);
     res.redirect("/listings");
-});
+}));
 
 app.use((req, res, next) =>{
     next(new ExpressError(404, "Page Not Found!"));
 });
 
 app.use((err, req, res, next) =>{
-    let {status, message} = err;
+    let {status = 500, message = "Something went wrong!"} = err;
     res.status(status).send(message);
 });
 
