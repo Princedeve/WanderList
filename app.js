@@ -6,6 +6,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const { cache } = require("react");
+const wrapAsync = require("./utils/wrapAsync");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
 
@@ -72,17 +73,12 @@ app.get("/listings/:id", async(req, res) =>{
 });
 
 //Create Route
-app.post("/listings", async(req, res, next) => {
+app.post("/listings", wrapAsync(async(req, res, next) => {
     // let listing = req.body.listing;//listing is a object jiske through hm access kar rahe he data ko
-    try{
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-    }
-    catch(err){
-        next(err);
-    }
-});
+}));
 
 //Edit Route
 app.get("/listings/:id/edit", async(req, res) =>{
