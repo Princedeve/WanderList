@@ -5,7 +5,7 @@ const Listing = require("./models/listing")
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const { cache } = require("react");
+// const { cache } = require("react");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
 
@@ -103,13 +103,13 @@ app.delete("/listings/:id", async(req, res) =>{
     res.redirect("/listings");
 });
 
-app.all("*", (req, res, next) =>{
+app.use((req, res, next) =>{
     next(new ExpressError(404, "Page Not Found!"));
 });
 
 app.use((err, req, res, next) =>{
-    let {statusCode, message} = err;
-    res.status(statusCode).send(message);
+    let {status, message} = err;
+    res.status(status).send(message);
 });
 
 app.listen(8080, () =>{
