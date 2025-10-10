@@ -5,6 +5,7 @@ const Listing = require("./models/listing")
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const { cache } = require("react");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
 
@@ -71,11 +72,16 @@ app.get("/listings/:id", async(req, res) =>{
 });
 
 //Create Route
-app.post("/listings", async(req, res) => {
+app.post("/listings", async(req, res, next) => {
     // let listing = req.body.listing;//listing is a object jiske through hm access kar rahe he data ko
+    try{
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
+    }
+    catch(err){
+        next(err);
+    }
 });
 
 //Edit Route
@@ -99,6 +105,10 @@ app.delete("/listings/:id", async(req, res) =>{
     console.log(deleteListing);
     res.redirect("/listings");
 });
+
+app.use((err, req, res, next) =>{
+    res.send("something went wrong");
+})
 
 app.listen(8080, () =>{
     console.log(`server is listening to port ${8080}`);
