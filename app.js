@@ -70,6 +70,7 @@ app.post("/listings", wrapAsync(async(req, res, next) => {
         throw new ExpressError(400, "Send valid data for listing");
     }
     const newListing = new Listing(listing);
+    
     await newListing.save();
     res.redirect("/listings");
 })
