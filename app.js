@@ -64,10 +64,16 @@ app.get("/listings/:id",  wrapAsync(async(req, res, next) =>{
 //Create Route
 app.post("/listings", wrapAsync(async(req, res, next) => {
     // let listing = req.body.listing;//listing is a object jiske through hm access kar rahe he data ko
+    console.log("listings67");
+    console.log(req.body);
+    if(!req.body.listing){// 400 means bad request
+        throw new ExpressError(400, "Send valid data for listing");
+    }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-}));
+})
+);
 
 //Edit Route
 app.get("/listings/:id/edit",  wrapAsync(async(req, res) =>{
