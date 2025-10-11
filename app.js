@@ -65,7 +65,7 @@ app.get("/listings/:id",  wrapAsync(async(req, res, next) =>{
 app.post("/listings", wrapAsync(async(req, res, next) => {
     let listing = await req.body?.listing;//listing is a object jiske through hm access kar rahe he data ko
     
-    console.log(listing);
+    // console.log(listing);
     if(!listing){// 400 means bad request
         throw new ExpressError(400, "Send valid data for listing");
     }
@@ -103,7 +103,7 @@ app.use((req, res, next) =>{
 
 app.use((err, req, res, next) =>{
     let {status = 500, message = "Something went wrong!"} = err;
-    res.status(status).send(message);
+    res.status(status).render("error.ejs", {message});
 });
 
 app.listen(8080, () =>{
