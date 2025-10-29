@@ -124,6 +124,7 @@ app.post("/listings/:id/reviews", wrapAsync(async(req, res) =>{
    await listing.save();
 
    console.log("new review saved");
+   res.send("new review saved");
 }));
 
 app.use((req, res, next) =>{
