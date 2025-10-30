@@ -8,7 +8,7 @@ const ejsMate = require("ejs-mate");
 // const { cache } = require("react");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
-const {listingSchema} = require("./schema.js");
+const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
@@ -54,6 +54,17 @@ const validateListing = (req, res, next) =>{
     //     throw new ExpressError(400, "Send valid data for listing");
     // }
     let {error} = listingSchema.validate(req.body);
+    // console.log(error);
+    if(error){
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    }else{
+        next();
+    }
+}
+
+const validateReview = (req, res, next) =>{
+    let {error} = reviewSchema.validate(req.body);
     // console.log(error);
     if(error){
         let errMsg = error.details.map((el) => el.message).join(",");
@@ -114,7 +125,7 @@ app.delete("/listings/:id",  wrapAsync(async(req, res) =>{
 
 //Reviews
 //Post Route
-app.post("/listings/:id/reviews", wrapAsync(async(req, res) =>{
+app.post("/listings/:id/reviews", validateReview,wrapAsync(async(req, res) =>{
    let listing = await Listing.findById(req.params.id);
    let newReview = new Review(req.body.review);
 
