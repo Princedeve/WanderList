@@ -30,7 +30,10 @@ app.get("/", (req, res)=>{
     res.send("Hi, i am root");
 });
 
+//Restructuring Listings
 app.use("/listings", listing);
+
+//Restructuring Reviews
 app.use("/listings/:id/reviews", review);
 
 
