@@ -1,6 +1,4 @@
-const { types, date } = require("joi");
 const mongoose = require("mongoose");
-const { getMaxListeners } = require("./listing");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
