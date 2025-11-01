@@ -5,8 +5,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
-const listing = require("./router/listings.js");
-const review = require("./router/review.js");
+const listings = require("./router/listings.js");
+const reviews = require("./router/reviews.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
 
@@ -31,10 +31,10 @@ app.get("/", (req, res)=>{
 });
 
 //Restructuring Listings
-app.use("/listings", listing);
+app.use("/listings", listings);
 
 //Restructuring Reviews
-app.use("/listings/:id/reviews", review);
+app.use("/listings/:id/reviews", reviews);
 
 
 app.use((req, res, next) =>{
