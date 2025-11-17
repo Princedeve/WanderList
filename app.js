@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const listings = require("./router/listings.js");
 const reviews = require("./router/reviews.js");
+const session = require("express-session");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
 
@@ -25,6 +26,13 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);//for repeated template
 app.use(express.static(path.join(__dirname, "public")));//for serve static fils
 
+const sessionOption = {
+    secret: "mysupersecretcode",
+    resave: false,
+    saveUinitialized: true
+};
+
+app.use(session(sessionOption));
 
 app.get("/", (req, res)=>{
     res.send("Hi, i am root");
