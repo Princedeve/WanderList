@@ -29,7 +29,12 @@ app.use(express.static(path.join(__dirname, "public")));//for serve static fils
 const sessionOption = {
     secret: "mysupersecretcode",
     resave: false,
-    saveUinitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,// expire date of this cookie
+        httpOnly: true,// use for security perpose like crose scripting attacks  
+    },
 };
 
 app.use(session(sessionOption));
