@@ -8,6 +8,7 @@ const ExpressError = require("./utils/ExpressError");
 const listings = require("./router/listings.js");
 const reviews = require("./router/reviews.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
 
@@ -37,10 +38,16 @@ const sessionOption = {
     },
 };
 
-app.use(session(sessionOption));
-
 app.get("/", (req, res)=>{
     res.send("Hi, i am root");
+});
+
+app.use(session(sessionOption));
+app.use(flash());
+
+app.use((req, res, next) =>{
+    res.locals.success = req.flash("success");
+    next();
 });
 
 //Restructuring Listings
