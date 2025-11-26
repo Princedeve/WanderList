@@ -3,18 +3,10 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        require: true,
-    },
-    password: {
-        type: password,
-        require: true,
-    },
-    email: {
-        type: email,
-        require: true,
-    }
+   email: {
+    type: String,
+    require: true,
+   }// password or username autometicaly create karega
 });
 
 userSchema.plugin(passportLocalMongoose);
