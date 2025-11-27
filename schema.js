@@ -18,6 +18,6 @@ module.exports.reviewSchema = Joi.object({
     }).required(),
 });
 
-module.exports.userSchema = Joi.object({
+// module.exports.userSchema = Joi.object({
 
-});
+// });
