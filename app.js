@@ -5,8 +5,9 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
-const listings = require("./router/listings.js");
-const reviews = require("./router/reviews.js");
+const listingRouter= require("./router/listings.js");
+const reviewRouter = require("./router/reviews.js");
+const userRouter = require("./router/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
@@ -49,7 +50,7 @@ app.use(session(sessionOption));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -60,11 +61,22 @@ app.use((req, res, next) =>{
     next();
 });
 
+app.get("/demouser", async(req, res) =>{
+    let fakeUser = new User({
+        email: "student@gmail.com",
+        username: "delta-student"
+    });
+
+    let registeredUser = await User.register(fakeUser, "helloWorld");
+    res.send(registeredUser);
+});
+
 //Restructuring Listings
-app.use("/listings", listings);
+app.use("/listings", listingRouter);
 
 //Restructuring Reviews
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 
 app.use((req, res, next) =>{
