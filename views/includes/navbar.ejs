@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top px-5">
   <div class="container-fluid">
   <a href="/listings" class="navbar-brand">
        
@@ -91,6 +91,27 @@ l3 125 93 3 92 3 0 79 0 80 -95 0 -94 0 -3 108 -3 108 -92 -25z"/>
         <a class="nav-link" href="/listings">All Listings</a>
         <a class="nav-link" href="/listings/new">Add new Listing</a>
       </div>
+     <ul class="navbar-nav ms-auto">
+  <li class="nav-item dropdown">
+    <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-bars big"></i>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+      <% if(!currUser){ %>
+        <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
+        <li><a class="dropdown-item" href="/login">Login</a></li>
+      <% } %>
+
+      <% if(currUser){ %>
+        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+      <% } %>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      
     </div>
   </div>
 </nav>
