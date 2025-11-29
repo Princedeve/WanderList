@@ -121,3 +121,12 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+
+.dropdown-menu {
+  left: -160% !important;
+  right: auto !important;
+}
+
+.big{
+    font-size: 150%;
+}
