@@ -23,7 +23,7 @@ router.get("/", wrapAsync(async(req, res) =>{
 }));
 //New Route
 router.get("/new", isLoggedIn, (req, res) =>{
-    console.log(req.user);
+    // console.log("new route checking: ",req.user);
     res.render("listings/new.ejs");
 });
 //Show Route
