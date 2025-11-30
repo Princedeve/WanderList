@@ -4,6 +4,7 @@ const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
+const { date } = require("joi");
 
 router.get("/signup", (req, res) =>{
     res.render("users/signup.ejs");
@@ -12,10 +13,10 @@ router.get("/signup", (req, res) =>{
 router.post("/signup", wrapAsync(async(req, res) =>{
     try{
         let {username, email, password} = req.body;
-        console.log(username, email, password);
+        console.log("Registered details: ",username, email, password);
         const newUser = new User({email, username});
         const registeredUser = await User.register(newUser, password);
-        console.log(registeredUser);
+        console.log(`Registered User: `,registeredUser);
         req.login(registeredUser, (err)=>{
             if(err){
                 return next(err);
