@@ -10,10 +10,15 @@ async function main() {
     await mongoose.connect(MONGO_URL);
 }
 
-const initDB = async () =>{
+const initDB = async () => {
     await Listing.deleteMany({});
-    await Listing.insertMany(initData.data);// data object se data nikalna
+    const newData = initData.data.map(obj => ({
+        ...obj,
+        owner: "692c058fbca529921b45512f"  // add field here (id/owner)
+    }));
+    await Listing.insertMany(newData);
     console.log("data was initialized");
 }
+
 
 initDB();
