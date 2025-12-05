@@ -4,13 +4,12 @@ const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
-const { date } = require("joi");
 
 router.get("/signup", (req, res) =>{
     res.render("users/signup.ejs");
 });
 
-router.post("/signup", wrapAsync(async(req, res) =>{
+router.post("/signup", wrapAsync(async(req, res, next) =>{
     try{
         let {username, email, password} = req.body;
         console.log("Registered details: ",username, email, password);
@@ -30,6 +29,7 @@ router.post("/signup", wrapAsync(async(req, res) =>{
     }
 }));
 
+
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
@@ -44,7 +44,7 @@ router.post("/login", saveRedirectUrl,
     res.redirect(redirectUrl);
 });
 
-router.get("/logout", (req, res) =>{
+router.get("/logout", (req, res, next) =>{
     req.logout((err) =>{
         if(err) {
             return next(err);

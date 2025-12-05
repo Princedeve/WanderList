@@ -20,6 +20,10 @@ const reviewSchema = new Schema({
             type: String,
             default: () => new Date().toLocaleTimeString()
         }
+    },
+        outher: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
     }
 });
 
