@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
     comment: {
         type: String,
-        require: true,
+        required: true,
     },
     rating: {
         type: Number,
@@ -21,7 +21,7 @@ const reviewSchema = new Schema({
             default: () => new Date().toLocaleTimeString()
         }
     },
-        outher: {
+    author: {        
         type: Schema.Types.ObjectId,
         ref: "User",
     }
