@@ -10,7 +10,7 @@ const {validateReview, isReviewAuthor, isLoggedIn} = require("../middleware.js")
 router.post("/",isLoggedIn, validateReview,wrapAsync(async(req, res) =>{
    let listing = await Listing.findById(req.params.id);
    let newReview = new Review(req.body.review);
-   newReview.auther = req.user._id;
+   newReview.author = req.user._id;
    console.log(newReview);
    listing.reviews.push(newReview);
 
@@ -30,5 +30,7 @@ router.delete("/:reviewId",isLoggedIn, isReviewAuthor, wrapAsync(async(req, res)
     req.flash("success", "Review Deleted!");
     res.redirect(`/listings/${id}`);
 }));
+
+
 
 module.exports = router;
