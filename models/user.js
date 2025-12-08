@@ -1,16 +1,17 @@
-const { required } = require("joi");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new Schema({
    email: {
-    type: String,
-    require: true,
-   }// password or username autometicaly create karega
+      type: String,
+      required: true,
+      unique: true
+   }
+   //passport js username or password autometicaly create karega 
 });
 
 userSchema.plugin(passportLocalMongoose);
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+
+module.exports = mongoose.model("User", userSchema);
