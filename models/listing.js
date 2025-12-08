@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const review = require("./review.js");
 const Schema = mongoose.Schema;
-const user = require("./user.js")
+const user = require("./user.js");
+const { required } = require("joi");
 
 const listingSchema = new Schema({
     title: {
         type: String,
-        require: true,
+        required: true,
     },
     description: String,
     image: {
