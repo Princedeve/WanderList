@@ -113,8 +113,14 @@ body{
   background-repeat: no-repeat;
 }
 
-.btns{
+/* .btns{
     display: flex;
+} */
+
+.btns {
+    display: flex;
+    gap: 10px;           /* buttons ke beech spacing */
+    align-items: center; /* vertical center */
 }
 
 .show-card{
