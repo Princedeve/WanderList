@@ -47,7 +47,7 @@ router.get("/:id/edit", isLoggedIn, isOwner,wrapAsync(async(req, res) =>{
     const listing = await Listing.findById(id);
       if(!listing){
             req.flash("error", "Listing you requested for does not exist!");
-           return res.redirect("/listings");
+           return res.redirect(`/listings/${id}`);
         }
     res.render("listings/edit.ejs", {listing});
 }));
