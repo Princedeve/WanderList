@@ -1,10 +1,14 @@
+if(process.env.NOD_ENV != "production"){
+    require('dotenv').config();
+}
+console.log(process.env.secret);
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const ExpressError = require("./utils/ExpressError");
+const ExpressError = require("./utils/ExpressError.js");
 const listingRouter= require("./router/listings.js");
 const reviewRouter = require("./router/reviews.js");
 const userRouter = require("./router/user.js");
