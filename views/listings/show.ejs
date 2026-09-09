@@ -66,8 +66,9 @@
         </form>
         <hr>
         <% } %>
-        <h5><b>All Reviews</b></h5>
+        <% if(listing.reviews.length > 0) { %>
         <div class="row mt-4">
+            <h5><b>All Reviews</b></h5>
             <% for(review of listing.reviews) {%>
                 <div class="card listing-card col-6 ">
                     <div class="card-body">
@@ -91,22 +92,19 @@
                 </div>
             <% } %>
             </div>
-            <div class="col-8 offset-3 mb-3">
-                <h3>Where you'll be</h3>
-                <div id="map"></div>
-            </div>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-    const map = L.map("map").setView([28.6139, 77.2090], 10);
+            <% } %>
+           <div class="col-8 offset-3 mb-3">
+    <h3>Where you'll be</h3>
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    <div id="map"
+        data-lat="<%= listing.geometry.coordinates[1] %>"
+        data-lng="<%= listing.geometry.coordinates[0] %>"
+        data-title="<%= listing.title %>"
+        data-location="<%= listing.location %>">
+    </div>
+</div>
 
-    L.marker([28.6139, 77.2090])
-        .addTo(map)
-        .bindPopup("Delhi")
-        .openPopup();
-    </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/map.js"></script>
     </div>
 </div>
