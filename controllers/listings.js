@@ -27,12 +27,48 @@ module.exports.showListing = async(req, res, next) =>{
 };
 
 module.exports.createListing = async(req, res, next) => {
+
     let url = req.file.path;
     let filename = req.file.filename;
+
     const newListing = new Listing(req.body.listing);
+
     newListing.owner = req.user._id;
-    newListing.image = {url, filename};
+    newListing.image = { url, filename };
+
+    // Location ko latitude & longitude me convert karna
+    const location = req.body.listing.location;
+    const country = req.body.listing.country;
+
+    const query = encodeURIComponent(`${location}, ${country}`);
+
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${query}`,
+        {
+            headers: {
+                "User-Agent": "WanderList/1.0"
+            }
+        }
+    );
+
+    const data = await response.json();
+
+    if (data.length === 0) {
+        req.flash("error", "Location not found. Please enter a valid location.");
+        return res.redirect("/listings/new");
+    }
+
+    const latitude = Number(data[0].lat);
+    const longitude = Number(data[0].lon);
+
+    // GeoJSON format: [longitude, latitude]
+    newListing.geometry = {
+        type: "Point",
+        coordinates: [longitude, latitude]
+    };
+
     await newListing.save();
+
     req.flash("success", "New Listing Created!");
     res.redirect("/listings");
 };
