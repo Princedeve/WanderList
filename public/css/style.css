@@ -10,6 +10,27 @@ body{
     width: 100%;
 }
 
+.house-marker {
+    font-size: 32px;
+    background: transparent;
+    border: none;
+}
+
+.map-tooltip {
+    text-align: center;
+    padding: 5px 8px;
+}
+
+.map-tooltip h4 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.map-tooltip p {
+    margin: 4px 0 0;
+    font-size: 12px;
+}
+
 .container{
     flex: 1;
 }
