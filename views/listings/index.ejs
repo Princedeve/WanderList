@@ -1,10 +1,44 @@
 <% layout("/layouts/boilerplate") %>
-
-    <h2>All Listings</h2>
-    <!-- <form method="get" action="/listings/new">
-        <button>Create New Listing</button>
-    </form> -->
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+ 
+    <div id="filters">
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+        </div>
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-duotone fa-solid fa-bed"></i></div>
+        <p>Room</p>
+        </div>
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-sharp fa-solid fa-mountain-city"></i></div>
+        <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+        </div>
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+        </div>
+        <div class="filter">
+        <div class="filter-icon"><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+        </div>
+         <div class="filter">
+        <div class="filter-icon"><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+        </div>
+         <div class="filter">
+        <div class="filter-icon"><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+        </div>
+         <div class="filter">
+        <div class="filter-icon"><i class="fa-regular fa-snowflake"></i></div>
+        <p>Arctic</p>
+        </div>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
  <% for(list of allListings){ %>
     <a href="/listings/<%= list._id %>" class="listing-link" target="_blank">
     <div class="card col listing-card">
