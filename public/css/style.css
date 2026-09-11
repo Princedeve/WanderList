@@ -5,29 +5,71 @@ body{
     min-height: 100vh;
 }
 
-#filters{
+.filters-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
 }
 
-.filter{
+#filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 2rem;
+    width: 100%;
+    scrollbar-width: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    flex: 0 0 auto;
     text-align: center;
-    margin-right: 2rem;
-    margin-top: 2rem;
     opacity: 0.7;
+    color: black;
+    text-decoration: none;
+    margin: 0;
 }
 
-.filter:hover{
+.filter:hover {
     opacity: 1;
+    cursor: pointer;
+    color: black;
+}
+
+.filter p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+.filter-icon {
+    font-size: 1.4rem;
+}
+
+.filter-arrow {
+    display: none;
+    border: none;
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+    z-index: 2;
     cursor: pointer;
 }
 
-.filter p{
-    font-size: 0.8rem;
-}
+@media (max-width: 768px) {
 
-.filter-icon{
-    font-size: 1.4rem;
+    .filter-arrow {
+        display: block;
+    }
+
 }
 
 #map {
