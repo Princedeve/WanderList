@@ -1,9 +1,42 @@
 const Listing = require("../models/listing");
 
-module.exports.index = async(req, res) =>{
-   const allListings = await Listing.find({});
-   allListings.forEach(l => l.price = Number(l.price));
-   res.render("listings/index.ejs", {allListings});
+module.exports.index = async (req, res) => {
+
+    const { category } = req.query;
+    const page = Number(req.query.page) || 1;
+
+    const limit = 6;
+    const skip = (page - 1) * limit;
+
+    let filter = {};
+
+    if (category) {
+        filter.category = category;
+    }
+
+    const allListings = await Listing.find(filter)
+        .skip(skip)
+        .limit(limit);
+
+    const totalListings = await Listing.countDocuments(filter);
+
+    const hasMore = skip + allListings.length < totalListings;
+
+    allListings.forEach(l => l.price = Number(l.price));
+
+    // View More ke liye sirf cards return honge
+    if (req.query.loadMore === "true") {
+        return res.render("listings/_listingCards.ejs", {
+            allListings
+        });
+    }
+
+    res.render("listings/index.ejs", {
+        allListings,
+        category,
+        page,
+        hasMore
+    });
 };
 
 module.exports.renderNewForm = (req, res) =>{
