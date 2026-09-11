@@ -1,56 +1,111 @@
 <% layout("/layouts/boilerplate") %>
- 
+
+<!-- Filters -->
+<div class="filters-wrapper">
+
     <div id="filters">
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-solid fa-fire"></i></div>
-        <p>Trending</p>
-        </div>
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-duotone fa-solid fa-bed"></i></div>
-        <p>Room</p>
-        </div>
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-sharp fa-solid fa-mountain-city"></i></div>
-        <p>Iconic Cities</p>
-        </div>
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-solid fa-mountain"></i></div>
-        <p>Mountains</p>
-        </div>
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-brands fa-fort-awesome"></i></div>
-        <p>Castles</p>
-        </div>
-        <div class="filter">
-        <div class="filter-icon"><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Amazing Pools</p>
-        </div>
-         <div class="filter">
-        <div class="filter-icon"><i class="fa-solid fa-campground"></i></div>
-        <p>Camping</p>
-        </div>
-         <div class="filter">
-        <div class="filter-icon"><i class="fa-solid fa-cow"></i></div>
-        <p>Farms</p>
-        </div>
-         <div class="filter">
-        <div class="filter-icon"><i class="fa-regular fa-snowflake"></i></div>
-        <p>Arctic</p>
-        </div>
+
+        <a href="/listings?category=Trending" class="filter">
+            <div class="filter-icon">
+                <i class="fa-solid fa-fire"></i>
+            </div>
+            <p>Trending</p>
+        </a>
+
+        <a href="/listings?category=Room" class="filter">
+            <div class="filter-icon">
+                <i class="fa-duotone fa-solid fa-bed"></i>
+            </div>
+            <p>Room</p>
+        </a>
+
+        <a href="/listings?category=Iconic%20Cities" class="filter">
+            <div class="filter-icon">
+                <i class="fa-sharp fa-solid fa-mountain-city"></i>
+            </div>
+            <p>Iconic Cities</p>
+        </a>
+
+        <a href="/listings?category=Mountains" class="filter">
+            <div class="filter-icon">
+                <i class="fa-solid fa-mountain"></i>
+            </div>
+            <p>Mountains</p>
+        </a>
+
+        <a href="/listings?category=Castles" class="filter">
+            <div class="filter-icon">
+                <i class="fa-brands fa-fort-awesome"></i>
+            </div>
+            <p>Castles</p>
+        </a>
+
+        <a href="/listings?category=Amazing%20Pools" class="filter">
+            <div class="filter-icon">
+                <i class="fa-solid fa-person-swimming"></i>
+            </div>
+            <p>Amazing Pools</p>
+        </a>
+
+        <a href="/listings?category=Camping" class="filter">
+            <div class="filter-icon">
+                <i class="fa-solid fa-campground"></i>
+            </div>
+            <p>Camping</p>
+        </a>
+
+        <a href="/listings?category=Farms" class="filter">
+            <div class="filter-icon">
+                <i class="fa-solid fa-cow"></i>
+            </div>
+            <p>Farms</p>
+        </a>
+
+        <a href="/listings?category=Arctic" class="filter">
+            <div class="filter-icon">
+                <i class="fa-regular fa-snowflake"></i>
+            </div>
+            <p>Arctic</p>
+        </a>
+
     </div>
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3">
- <% for(list of allListings){ %>
-    <a href="/listings/<%= list._id %>" class="listing-link" target="_blank">
-    <div class="card col listing-card">
-        <img src="<%= list.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-        <div class="card-img-overlay"><b>WanderList</b></div>
-        <div class="card-body">
-            <p class="card-text">
-                <b><%= list.title %></b><br>
-                <%= Number(list.price).toLocaleString("en-IN") %> / night
-            </p>
-        </div>
+
+    <!-- Right Arrow -->
+    <button id="filter-right" class="filter-arrow">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+</div>
+
+
+<!-- Listings -->
+<div
+    id="listing-container"
+    class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 mt-3"
+>
+
+    <%- include("_listingCards", { allListings }) %>
+
+</div>
+
+
+<!-- View More -->
+<% if (hasMore) { %>
+
+    <div class="text-center my-5">
+
+        <button
+            id="view-more"
+            class="btn btn-dark"
+            data-page="<%= page %>"
+            data-category="<%= category || '' %>"
+        >
+            View More
+        </button>
+
     </div>
-    </a>
- <% } %>
-    </div>
+
+<% } %>
+
+
+<script src="/js/listings.js"></script>
