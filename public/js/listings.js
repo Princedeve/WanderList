@@ -3,6 +3,7 @@ const listingContainer = document.getElementById("listing-container");
 
 const filters = document.getElementById("filters");
 const filterRight = document.getElementById("filter-right");
+const filterLeft = document.getElementById("filter-left");
 
 
 // ===============================
@@ -73,12 +74,23 @@ if (filterRight) {
 
 }
 
+if (filterLeft) {
+    filterLeft.addEventListener("click", () => {
+        filters.scrollBy({
+            left: -250,
+            behavior: "smooth"
+        });
+    });
+}
+
 function checkFilterOverflow() {
 
     if (filters.scrollWidth > filters.clientWidth) {
         filterRight.style.display = "block";
+        filterLeft.style.display = "block";
     } else {
         filterRight.style.display = "none";
+        filterLeft.style.display = "none";
     }
 
 }

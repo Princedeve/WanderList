@@ -21,6 +21,7 @@ body{
     scrollbar-width: none;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    align-items: center;
 }
 
 #filters::-webkit-scrollbar {
@@ -43,7 +44,7 @@ body{
 }
 
 .filter p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin-bottom: 0;
 }
 
@@ -70,6 +71,43 @@ body{
         display: block;
     }
 
+}
+
+.tax-info{
+    display: none;
+}
+
+.tax-toggle{
+    border: 1px solid black;
+    border-radius: 0.6rem;
+    height: 2.5rem;
+    padding: 0.3rem;
+    margin-left: 12rem;
+    display: flex;
+    align-items: center;
+}
+
+.search-btn{
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+}
+
+.search-btn:hover{
+    background-color: #fe424d;
+    color: #fff;
+}
+
+.search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.search-inp{
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 1rem;
 }
 
 #map {
