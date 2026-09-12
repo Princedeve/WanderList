@@ -13,6 +13,7 @@ const listingRouter= require("./router/listings.js");
 const reviewRouter = require("./router/reviews.js");
 const userRouter = require("./router/user.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -43,20 +44,34 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);//for repeated template
 app.use(express.static(path.join(__dirname, "public")));//for serve static fils
 
+// Session Sections
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+
+    crypto: {
+        secret: process.env.SESSION_SECRET,
+    },
+
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+    console.log("ERROR in MONGO SESSION STORE", err);
+});
+
 const sessionOption = {
-    secret: "mysupersecretcode",
+    store,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+
     cookie: {
         expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,// expire date of this cookie
-        httpOnly: true,// use for security perpose like crose scripting attacks  
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
     },
 };
-
-// app.get("/", (req, res)=>{
-//     res.send("Hi, i am root");
-// });
 
 app.use(session(sessionOption));
 app.use(flash());
