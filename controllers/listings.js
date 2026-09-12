@@ -189,3 +189,34 @@ module.exports.destroyListing = async(req, res) =>{
     req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
 };
+
+module.exports.searchListings = async (req, res) => {
+
+    const { q } = req.query;
+
+    if (!q || !q.trim()) {
+        return res.redirect("/listings");
+    }
+
+    const search = q.trim();
+
+    const allListings = await Listing.find({
+        $or: [
+            { title: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } },
+            { category: { $regex: search, $options: "i" } }
+        ]
+    });
+
+    allListings.forEach(l => l.price = Number(l.price));
+
+    res.render("listings/index.ejs", {
+        allListings,
+        category: null,
+        page: 1,
+        hasMore: false,
+        searchQuery: search
+    });
+   
+};
