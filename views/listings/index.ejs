@@ -113,7 +113,7 @@
 
 
 <!-- View More -->
-<% if (hasMore) { %>
+<% if (hasMore && (typeof searchQuery === "undefined" || !searchQuery)) { %>
 
     <div class="text-center my-5">
 
