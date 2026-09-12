@@ -1,9 +1,14 @@
-body{
+body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
+
+/* =========================
+   Filters
+========================= */
 
 .filters-wrapper {
     display: flex;
@@ -19,7 +24,7 @@ body{
     gap: 2rem;
     width: 100%;
     scrollbar-width: none;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     margin-bottom: 1rem;
     align-items: center;
 }
@@ -34,7 +39,7 @@ body{
     opacity: 0.7;
     color: black;
     text-decoration: none;
-    margin: 0;
+    margin-top: 1rem;
 }
 
 .filter:hover {
@@ -45,12 +50,15 @@ body{
 
 .filter p {
     font-size: 0.7rem;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
 }
 
 .filter-icon {
     font-size: 1.4rem;
 }
+
+
+/* Filter Arrows */
 
 .filter-arrow {
     display: none;
@@ -73,11 +81,16 @@ body{
 
 }
 
-.tax-info{
+
+/* =========================
+   Tax
+========================= */
+
+.tax-info {
     display: none;
 }
 
-.tax-toggle{
+.tax-toggle {
     border: 1px solid black;
     border-radius: 0.6rem;
     height: 2.5rem;
@@ -85,30 +98,77 @@ body{
     margin-left: 12rem;
     display: flex;
     align-items: center;
+    margin-right: 0.2rem;
 }
 
-.search-btn{
+@media (max-width: 1100px) {
+    .tax-toggle {
+        margin-left: 0;
+        height: 5rem;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        border-radius: 0.5rem;
+    }
+
+    .tax-toggle input {
+        width: 0.9rem;
+        height: 0.9rem;
+        margin-right: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .tax-toggle {
+        margin-left: 0;
+        height: 5rem;
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        border-radius: 0.5rem;
+    }
+
+    .tax-toggle input {
+        width: 0.9rem;
+        height: 0.9rem;
+        margin-right: 1rem;
+    }
+}
+
+/* =========================
+   Search
+========================= */
+
+.search-btn {
     background-color: #fe424d;
     color: #fff;
     border-radius: 25px;
     padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
-.search-btn:hover{
+.search-btn:hover {
     background-color: #fe424d;
     color: #fff;
 }
 
-.search-btn i{
+.search-btn i {
     display: inline;
     margin-right: 0.5rem;
 }
 
-.search-inp{
+.search-inp {
     border-radius: 25px;
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 1rem;
 }
+
+
+/* =========================
+   Map
+========================= */
 
 #map {
     height: 400px;
@@ -136,53 +196,282 @@ body{
     font-size: 12px;
 }
 
-.container{
+
+/* =========================
+   Container
+========================= */
+
+.container {
     flex: 1;
 }
 
-/* Navbar */
-.navbar{
+
+/* =================================
+   NAVBAR - DESKTOP
+================================= */
+
+.navbar {
     height: 5rem;
     background-color: white;
 }
 
+.container-fluid {
+    display: flex;
+    align-items: center;
+}
+
+/* Desktop Explore */
+.desktop-nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Desktop Search */
+.desktop-search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 2rem;
+}
+
+.desktop-search form {
+    width: 100%;
+    max-width: 650px;
+}
+
+/* Mobile button hidden on desktop */
+.mobile-menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}
+
+
+/* =================================
+   MOBILE SIDEBAR
+================================= */
+
+#mobile-sidebar {
+    display: none;
+}
+
+#mobile-overlay {
+    display: none;
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 767px) {
+
+    .navbar {
+        height: 4.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Desktop items hide */
+    .desktop-nav,
+    .desktop-search {
+        display: none;
+    }
+
+    /* Mobile menu icon show */
+    .mobile-menu-btn {
+        display: block;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+
+    /* Sidebar */
+    #mobile-sidebar {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        width: 82%;
+        max-width: 350px;
+        height: 100vh;
+
+        background: white;
+
+        z-index: 1050;
+
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+
+        overflow-y: auto;
+    }
+
+    #mobile-sidebar.active {
+        transform: translateX(0);
+    }
+
+
+    /* Overlay */
+    #mobile-overlay {
+        display: block;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        z-index: 1040;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition: opacity 0.3s ease,
+                    visibility 0.3s ease;
+    }
+
+    #mobile-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* Sidebar Header */
+    .mobile-sidebar-header {
+        height: 4.5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 1.2rem;
+
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mobile-sidebar-header span {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .mobile-sidebar-header button {
+        border: none;
+        background: transparent;
+
+        font-size: 1.5rem;
+
+        cursor: pointer;
+    }
+
+
+    /* Sidebar Content */
+    .mobile-sidebar-content {
+        padding: 1.2rem;
+    }
+
+
+    /* Mobile Search */
+    .mobile-search {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+
+    .mobile-search input {
+        border-radius: 20px 0 0 20px;
+    }
+
+    .mobile-search button {
+        width: 45px;
+
+        border: none;
+
+        background: #fe424d;
+        color: white;
+
+        border-radius: 0 20px 20px 0;
+    }
+
+
+    /* Menu Links */
+    .mobile-menu-link {
+        display: flex;
+        align-items: center;
+
+        gap: 1rem;
+
+        padding: 0.9rem 0.5rem;
+
+        color: #222;
+        text-decoration: none;
+
+        font-size: 1rem;
+
+        border-radius: 8px;
+    }
+
+    .mobile-menu-link:hover {
+        background-color: #f5f5f5;
+        color: #222;
+    }
+
+    .mobile-menu-link i {
+        width: 22px;
+        text-align: center;
+    }
+
+
+    .mobile-divider {
+        height: 1px;
+        background: #ddd;
+
+        margin: 0.8rem 0;
+    }
+
+}
+
 .wl-logo {
-  color: #009688;
-  height: auto;
-  width: 140px;
+    color: #009688;
+    height: auto;
+    width: 140px;
 }
 
 .wl-logo:hover {
-  color: #ff5722;  
+    color: #ff5722;
 }
+/* =========================
+   Footer
+========================= */
 
-.nav-link{
-    color: #222 !important; /* important means bootstrap ki styling ko override karke apni styling dalna */
-}
-
-/* Footer */
-.f-info-links a{
+.f-info-links a {
     text-decoration: none;
     color: #222222;
 }
 
-.f-info-links a:hover{
+.f-info-links a:hover {
     text-decoration: underline;
 }
 
-.f-info-links, .f-info-socials, .f-info-brand{
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.f-info-socials i{
+.f-info-socials i {
     font-size: 1.2rem;
     margin-right: 1rem;
 }
 
-.f-info{
+.f-info {
     text-align: center;
     height: 8rem;
     background-color: #ebebeb;
@@ -192,78 +481,166 @@ body{
     align-items: space-evenly;
 }
 
-/* Cards */
-.listing-card{
+
+/* =========================
+   Cards
+========================= */
+
+.listing-card {
     border: none !important;
     margin-bottom: 2rem;
 }
 
-.card-img-top{
+.card-img-top {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
 }
 
-.card-body{
+.card-body {
     padding: 0 !important;
 }
 
-.card-text p{
+.card-text p {
     font-weight: 400 !important;
 }
 
-.listing-link{
+.listing-link {
     text-decoration: none;
 }
 
+
 /* Card Effect */
-.card-img-overlay{
+
+.card-img-overlay {
     opacity: 0;
 }
-.card-img-overlay:hover{
+
+.card-img-overlay:hover {
     opacity: 0.1;
     background-color: white;
 }
 
-/* New Page */
 
-.add-btn{
+/* =========================
+   New Page
+========================= */
+
+.add-btn {
     background-color: #009688 !important;
     border: none !important;
 }
 
 .add-btn:hover {
-  background-color: #ff5722 !important;  
+    background-color: #ff5722 !important;
 }
 
-/* Show Page */
-.show-img{
-  height: 60vh;
-  background-size: cover;     
-  background-position: center; 
-  background-repeat: no-repeat;
-}
 
-/* .btns{
-    display: flex;
-} */
+/* =========================
+   Show Page
+========================= */
+
+.show-img {
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 .btns {
     display: flex;
-    gap: 10px;           /* buttons ke beech spacing */
-    align-items: center; /* vertical center */
+    gap: 10px;
+    align-items: center;
 }
 
-.show-card{
+.show-card {
     padding-left: 0;
     padding-right: 0;
 }
 
-.dropdown-menu {
-  left: -160% !important;
-  right: auto !important;
+
+/* =========================
+   Dropdown
+========================= */
+
+.navbar .dropdown-menu {
+    left: auto !important;
+    right: 0 !important;
 }
 
-.big{
-    font-size: 150%;
+
+
+/* =========================
+   Account Menu Button
+========================= */
+
+.big {
+    font-size: 1.15rem;
+}
+
+.navbar .nav-item.dropdown > .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid #ddd;
+    border-radius: 50%;
+
+    background-color: white;
+
+    transition: all 0.2s ease;
+}
+
+.navbar .nav-item.dropdown > .nav-link:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+}
+
+
+/* =========================
+   Desktop Account Dropdown
+========================= */
+
+.navbar .dropdown-menu {
+    min-width: 210px;
+    padding: 0.5rem;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+    margin-top: 0.6rem !important;
+}
+
+.navbar .dropdown-item {
+    display: flex;
+    align-items: center;
+
+    padding: 0.75rem 0.9rem;
+
+    border-radius: 8px;
+
+    font-size: 0.95rem;
+    color: #222;
+
+    transition: background 0.2s ease;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: #222;
+}
+
+.navbar .dropdown-item b {
+    font-weight: 600;
+}
+
+.navbar .dropdown-item i {
+    width: 25px;
+    margin-right: 0.7rem;
+    text-align: center;
 }
