@@ -2,12 +2,14 @@ const mongoose = require("mongoose");
 const initData = require("./data");
 const Listing = require("../models/listing.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/WanderList";
+const dbUrl = process.env.ATLASDB_URL;
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    // await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
     console.log("connected to DB");
 }
 
