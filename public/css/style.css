@@ -207,7 +207,7 @@ body {
 
 
 /* =================================
-   NAVBAR - DESKTOP
+   NAVBAR
 ================================= */
 
 .navbar {
@@ -220,13 +220,11 @@ body {
     align-items: center;
 }
 
-/* Desktop Explore */
 .desktop-nav {
     display: flex;
     align-items: center;
 }
 
-/* Desktop Search */
 .desktop-search {
     flex: 1;
     display: flex;
@@ -239,7 +237,6 @@ body {
     max-width: 650px;
 }
 
-/* Mobile button hidden on desktop */
 .mobile-menu-btn {
     display: none;
     border: none;
@@ -249,9 +246,9 @@ body {
 }
 
 
-/* =================================
-   MOBILE SIDEBAR
-================================= */
+/* =========================
+   Mobile Sidebar
+========================= */
 
 #mobile-sidebar {
     display: none;
@@ -262,51 +259,82 @@ body {
 }
 
 
-/* =================================
-   MOBILE
-================================= */
+/* =========================
+   WanderList Logo
+========================= */
+
+.wl-logo {
+    color: #009688;
+    height: auto;
+    width: 140px;
+}
+
+.wl-logo:hover {
+    color: #ff5722;
+}
+
+
+/* =========================
+   Mobile Navbar
+========================= */
 
 @media (max-width: 767px) {
 
     .navbar {
         height: 4.5rem;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.9rem !important;
     }
 
-    /* Desktop items hide */
-    .desktop-nav,
-    .desktop-search {
+    /* Desktop navigation hidden on mobile */
+    .navbar-collapse {
         display: none;
     }
 
-    /* Mobile menu icon show */
+    /* Mobile hamburger */
     .mobile-menu-btn {
         display: block;
         margin-left: auto;
+        margin-right: 0.25rem;
         cursor: pointer;
+        padding: 0.5rem;
+        font-size: 1.4rem;
     }
 
+    /* Logo */
+    .wl-logo {
+        width: 125px;
+        margin-left: 0.25rem;
+    }
 
-    /* Sidebar */
+@media (max-width: 767px) {
+
+    .mobile-menu-btn {
+        transform: translateY(-15px);
+    }
+
+    .wl-logo {
+        transform: translateY(-15px);
+    }
+
+}
+
+    /* =========================
+       Mobile Sidebar
+    ========================= */
+
     #mobile-sidebar {
         display: block;
         position: fixed;
         top: 0;
         right: 0;
-
         width: 82%;
         max-width: 350px;
         height: 100vh;
-
         background: white;
-
         z-index: 1050;
-
         transform: translateX(100%);
         transition: transform 0.3s ease;
-
         box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-
         overflow-y: auto;
     }
 
@@ -315,25 +343,22 @@ body {
     }
 
 
-    /* Overlay */
+    /* =========================
+       Mobile Overlay
+    ========================= */
+
     #mobile-overlay {
         display: block;
-
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-
         background: rgba(0, 0, 0, 0.45);
-
         z-index: 1040;
-
         opacity: 0;
         visibility: hidden;
-
-        transition: opacity 0.3s ease,
-                    visibility 0.3s ease;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     #mobile-overlay.active {
@@ -342,16 +367,16 @@ body {
     }
 
 
-    /* Sidebar Header */
+    /* =========================
+       Sidebar Header
+    ========================= */
+
     .mobile-sidebar-header {
         height: 4.5rem;
-
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         padding: 0 1.2rem;
-
         border-bottom: 1px solid #ddd;
     }
 
@@ -363,20 +388,19 @@ body {
     .mobile-sidebar-header button {
         border: none;
         background: transparent;
-
         font-size: 1.5rem;
-
         cursor: pointer;
     }
 
 
-    /* Sidebar Content */
+    /* =========================
+       Sidebar Content
+    ========================= */
+
     .mobile-sidebar-content {
         padding: 1.2rem;
     }
 
-
-    /* Mobile Search */
     .mobile-search {
         display: flex;
         margin-bottom: 1.5rem;
@@ -388,30 +412,20 @@ body {
 
     .mobile-search button {
         width: 45px;
-
         border: none;
-
         background: #fe424d;
         color: white;
-
         border-radius: 0 20px 20px 0;
     }
 
-
-    /* Menu Links */
     .mobile-menu-link {
         display: flex;
         align-items: center;
-
         gap: 1rem;
-
         padding: 0.9rem 0.5rem;
-
         color: #222;
         text-decoration: none;
-
         font-size: 1rem;
-
         border-radius: 8px;
     }
 
@@ -425,14 +439,11 @@ body {
         text-align: center;
     }
 
-
     .mobile-divider {
         height: 1px;
         background: #ddd;
-
         margin: 0.8rem 0;
     }
-
 }
 
 .wl-logo {
@@ -582,15 +593,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 46px;
     height: 46px;
-
     border: 1px solid #ddd;
     border-radius: 50%;
-
     background-color: white;
-
     transition: all 0.2s ease;
 }
 
@@ -643,4 +650,98 @@ body {
     width: 25px;
     margin-right: 0.7rem;
     text-align: center;
+}
+
+/* =========================
+   SHOW PAGE - MOBILE
+========================= */
+@media (max-width: 767px) {
+
+    /* Main listing card */
+    .show-card {
+        width: calc(100% - 24px) !important;
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+        margin-top: 10px !important;
+    }
+
+    /* Listing image */
+    .show-img {
+        height: 250px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        border-radius: 14px !important;
+        display: block;
+    }
+
+    /* Image ke neeche details */
+    .show-card .card-body {
+        padding: 12px 8px 5px !important;
+    }
+
+    .show-card .card-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0.7rem;
+    }
+
+    /* Heading bhi thodi andar */
+    .row.mt-3 .col-8.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 12px !important;
+    }
+
+    .row.mt-3 h3 {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-bottom: 0.8rem;
+    }
+
+    /* Edit / Delete */
+    .btns {
+        display: flex !important;
+        gap: 8px !important;
+        align-items: center !important;
+        margin: 5px 12px 20px !important;
+    }
+
+    .btns .btn {
+        font-size: 0.8rem !important;
+        padding: 6px 15px !important;
+    }
+
+    .btns .offset-3 {
+        margin-left: 0 !important;
+    }
+
+    .btns .col-1 {
+        width: auto !important;
+    }
+
+    /* Review / other content */
+    .col-8.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 12px !important;
+    }
+
+    /* Map section */
+    .col-8.mb-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 12px !important;
+    }
+
+    .col-8.mb-3 h3 {
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+    }
+
+    #map {
+        width: 100% !important;
+        height: 250px !important;
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
 }
