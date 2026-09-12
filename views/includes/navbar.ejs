@@ -1,9 +1,12 @@
 <link rel="stylesheet" href="/css/style.css">
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top px-5">
-  <div class="container-fluid">
-  <a href="/listings" class="navbar-brand">
-       
-<svg class="wl-logo" viewBox="0 0 1536 1024" height="40" width="auto"
+
+    <div class="container-fluid">
+
+        <!-- WanderList Brand Logo -->
+        <a href="/listings" class="navbar-brand">
+    <svg class="wl-logo" viewBox="0 0 1536 1024" height="40" width="auto"
        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
     <g transform="translate(0,1024) scale(0.1,-0.1)"
        fill="currentColor" stroke="none">
@@ -81,43 +84,247 @@ l3 125 93 3 92 3 0 79 0 80 -95 0 -94 0 -3 108 -3 108 -92 -25z"/>
 <path d="M11960 5005 l0 -385 100 0 100 0 0 385 0 385 -100 0 -100 0 0 -385z"/>
     </g>
   </svg>
+</a>
 
-  </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex">
-        <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations">
-        <button class="btn search-btn type="submit"> <i class="fa-solid fa-magnifying-glass"></i>Search</button>
-    </form>
-      </div>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-bars big"></i>
-          </a>
-          
-          <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
-            <a class="nav-link" href="/listings/new">List Your Place</a>
-      <% if(!currUser){ %>
-        <li><a class="dropdown-item" href="/signup"><b>Sign Up</b></a></li>
-        <li><a class="dropdown-item" href="/login"><b>Login</b></a></li>
-      <% } %>
 
-      <% if(currUser){ %>
-        <li><a class="dropdown-item" href="/logout">Logout</a></li>
-      <% } %>
-    </ul>
-  </li>
-</ul>
+        <!-- Mobile Menu Button -->
+        <button
+            type="button"
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Open menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-      </div>
-      
+
+        <!-- Desktop Navbar -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <!-- Explore -->
+            <div class="navbar-nav">
+                <a class="nav-link" href="/listings">
+                    Explore
+                </a>
+            </div>
+
+
+            <!-- Search -->
+            <div class="navbar-nav ms-auto">
+
+                <form class="d-flex">
+
+                    <input
+                        class="form-control me-2 search-inp"
+                        type="search"
+                        placeholder="Search destinations"
+                    >
+
+                    <button
+                        class="btn search-btn"
+                        type="submit"
+                    >
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- Account Menu -->
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown">
+
+                    <a
+                        class="nav-link"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i class="fa-solid fa-bars big"></i>
+                    </a>
+
+
+                    <ul
+                        class="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="navbarDropdown"
+                    >
+
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="/listings/new"
+                            >
+                                <i class="fa-solid fa-house"></i>
+                                <span>List Your Place</span>
+                            </a>
+                        </li>
+
+
+                        <% if(!currUser){ %>
+
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="/signup"
+                                >
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    <span><b>Sign Up</b></span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="/login"
+                                >
+                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    <span><b>Login</b></span>
+                                </a>
+                            </li>
+
+                        <% } %>
+
+
+                        <% if(currUser){ %>
+
+                            <li>
+                                <a
+                                    class="dropdown-item"
+                                    href="/logout"
+                                >
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+
+                        <% } %>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+        </div>
+
     </div>
-  </div>
+
 </nav>
+
+
+<!-- =========================
+     Mobile Overlay
+========================= -->
+
+<div id="mobile-overlay"></div>
+
+
+<!-- =========================
+     Mobile Sidebar
+========================= -->
+
+<div id="mobile-sidebar">
+
+    <div class="mobile-sidebar-header">
+
+        <span>WanderList</span>
+
+        <button
+            type="button"
+            id="mobile-close"
+            aria-label="Close menu"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+
+    <div class="mobile-sidebar-content">
+
+        <!-- Mobile Search -->
+        <form class="mobile-search">
+
+            <input
+                type="search"
+                class="form-control"
+                placeholder="Search destinations"
+            >
+
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+        </form>
+
+
+        <!-- Explore -->
+        <a
+            href="/listings"
+            class="mobile-menu-link"
+        >
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore</span>
+        </a>
+
+
+        <!-- List Your Place -->
+        <a
+            href="/listings/new"
+            class="mobile-menu-link"
+        >
+            <i class="fa-solid fa-house"></i>
+            <span>List Your Place</span>
+        </a>
+
+
+        <div class="mobile-divider"></div>
+
+
+        <% if(!currUser){ %>
+
+            <a
+                href="/signup"
+                class="mobile-menu-link"
+            >
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Sign Up</span>
+            </a>
+
+
+            <a
+                href="/login"
+                class="mobile-menu-link"
+            >
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+            </a>
+
+        <% } %>
+
+
+        <% if(currUser){ %>
+
+            <a
+                href="/logout"
+                class="mobile-menu-link"
+            >
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+
+<script src="/js/navbar.js"></script>
